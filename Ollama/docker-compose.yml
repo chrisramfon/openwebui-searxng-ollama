@@ -1,0 +1,29 @@
+services:
+  ollama:
+    image: "ollama/ollama:0.30.10"
+    container_name: "ollama"
+    ports:
+      - "11434:11434"
+    volumes:
+      - "ollama:/root/.ollama"
+    restart: "unless-stopped"
+    networks:
+      - "ai-shared"
+    tty: true
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+      - OLLAMA_CONTEXT_LENGTH=32000
+    deploy:
+      resources:
+          reservations:
+              devices:
+                - driver: nvidia
+                  count: all
+                  capabilities: [gpu]
+
+volumes:
+  ollama:
+
+networks:
+  ai-shared:
+    external: true
