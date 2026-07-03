@@ -1,0 +1,74 @@
+# Read the documentation before extending the defaults:
+# https://docs.searxng.org/admin/settings/
+
+use_default_settings: true
+
+server:
+  secret_key: "41931b0ec46ad84a23cb33d5cb917ea08d4c86d6cf78394556a3c897a34b110e"
+  image_proxy: true
+  limiter: false
+
+search:
+  safe_search: 1
+  autocomplete: ""
+  default_lang: ""
+  formats:
+    - html
+    - json
+  languages:
+    - es-MX
+    - en-US
+
+outgoing:
+  request_timeout: 10
+  max_request_timeout: 25
+  extra_proxy_timeout: 25
+
+engines:
+  
+  - name: duckduckgo
+    disabled: true    # optional: if its parser keeps breaking
+
+  - name: bing
+    disabled: true
+    User-Agent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 \
+        (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+
+  - name: wikipedia
+    disabled: false
+    User-Agent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 \
+        (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+
+  - name: reddit
+    disabled: false
+    User-Agent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 \
+        (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+
+  - name: brave
+    disabled: false
+
+  - name: braveapi
+    disabled: false
+
+  - name: google
+    disabled: true
+
+  - name: startpage
+    disabled: true
+
+  - name: yahoo
+    disabled: true
+
+  - name: qwant
+    disabled: true
+
+  - name: bing_news
+    disabled: true    # if you only want general web, not news vertical
+
+  - name: bing_images
+    disabled: true    # if you don't need image search
+
+  - name: reddit_images
+    disabled: true    # if you only want text posts
+
+

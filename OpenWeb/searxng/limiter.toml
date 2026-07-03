@@ -1,0 +1,8 @@
+[botdetection.ip_lists]
+# Allow all IPv4 and IPv6 addresses (fully trusted in your environment)
+pass_ip = [
+  "192.168.0.0/16",
+  "10.0.0.0/8",
+  "172.16.0.0/12",
+  "fd00::/8"
+]

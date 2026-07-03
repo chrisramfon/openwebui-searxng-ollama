@@ -1,0 +1,40 @@
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    ports:
+      - "3000:8080"
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - ENABLE_WEB_SEARCH=true
+      - WEB_SEARCH_ENGINE="searxng"
+      - SEARXNG_QUERY_URL=http://searxng:8080/search?q=<query>&format=json
+      - WEB_SEARCH_RESULT_COUNT=3
+      - WEB_SEARCH_CONCURRENT_REQUESTS=4
+    volumes:
+      - open-webui:/app/backend/data
+    networks:
+      - ai-shared
+    restart: unless-stopped
+
+  searxng:
+    image: "searxng/searxng:latest"
+    container_name: "searxng"
+    restart: "unless-stopped"
+    ports:
+        - "8080:8080"
+    volumes:
+      - "./searxng:/etc/searxng:rw"
+    environment:
+      - SEARXNG_BASE_URL=http://localhost:8080/
+      - UWSGI_WORKERS=4
+      - UWSGI_THREADS=4
+    networks:
+      - "ai-shared"
+
+volumes:
+  open-webui:
+
+networks:
+  ai-shared:
+    external: true
